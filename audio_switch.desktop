@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Audio-Ausgang
+Comment=Umschalten zwischen Matisse HD und Razer BlackShark
+Exec=python3 /mnt/M2 Linux I/Claude/Projekte/AudioSwitch/audio_switch.py
+Icon=audio-card
+Terminal=false
+Type=Application
+Categories=AudioVideo;Audio;
