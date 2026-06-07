@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 import subprocess
 import os
+import sys
 import json
 import re
+import fcntl
 import gi
 gi.require_version("Gtk", "3.0")
 gi.require_version("XApp", "1.0")
@@ -11,6 +13,31 @@ from PIL import Image, ImageDraw
 
 BASE_DIR    = os.path.dirname(os.path.abspath(__file__))
 CONFIG_PATH = os.path.expanduser("~/.config/audioswitch/config.json")
+LOCK_PATH   = os.path.expanduser("~/.config/audioswitch/audioswitch.lock")
+
+
+# ── Single-Instance-Schutz ────────────────────────────────────────────────────
+
+def acquire_single_instance_lock():
+    """Verhindert, dass AudioSwitch mehrfach gleichzeitig läuft.
+
+    Nutzt einen exklusiven Datei-Lock (fcntl.flock). Der Lock wird vom Kernel
+    automatisch freigegeben, sobald der Prozess endet – auch bei einem Absturz,
+    es bleibt also nie ein "toter" Lock zurück.
+
+    Rückgabe: das offene Lock-Dateiobjekt (muss am Leben bleiben!) oder None,
+    wenn bereits eine andere Instanz läuft.
+    """
+    os.makedirs(os.path.dirname(LOCK_PATH), exist_ok=True)
+    lock_file = open(LOCK_PATH, "w")
+    try:
+        fcntl.flock(lock_file.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except OSError:
+        lock_file.close()
+        return None
+    lock_file.write(str(os.getpid()))
+    lock_file.flush()
+    return lock_file
 
 ICON_TYPES  = ["speaker", "headset"]
 ICON_LABELS = {"speaker": "Lautsprecher", "headset": "Headset"}
@@ -419,5 +446,13 @@ class AudioTray:
 
 
 if __name__ == "__main__":
+    # Zweite Instanz verhindern. _lock muss referenziert bleiben, damit der
+    # Lock für die gesamte Laufzeit gehalten wird (sonst Garbage Collection).
+    _lock = acquire_single_instance_lock()
+    if _lock is None:
+        print("AudioSwitch läuft bereits – zweite Instanz wird nicht gestartet.",
+              file=sys.stderr)
+        sys.exit(0)
+
     AudioTray()
     Gtk.main()
