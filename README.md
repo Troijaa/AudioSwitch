@@ -12,8 +12,9 @@ Kleines Tray-Tool für Linux Mint / Cinnamon zum schnellen Wechseln zwischen zwe
 
 ## Installation (empfohlen)
 
-Das Installationsskript richtet alles automatisch ein (Abhängigkeiten, Autostart
-und Menü-Eintrag mit dem korrekten Pfad):
+Das Installationsskript kopiert AudioSwitch an einen festen Ort
+(`~/.local/share/AudioSwitch`) und richtet alles automatisch ein (Abhängigkeiten,
+Autostart und Menü-Eintrag mit dem korrekten Pfad):
 
 ```bash
 git clone https://github.com/Troijaa/AudioSwitch.git
@@ -21,10 +22,13 @@ cd AudioSwitch
 ./install.sh
 ```
 
-Entfernen (Autostart- und Menü-Eintrag):
+Danach wird der heruntergeladene Ordner **nicht mehr benötigt** und kann gelöscht
+werden — die App läuft aus `~/.local/share/AudioSwitch`.
+
+Vollständig deinstallieren (entfernt Starter, Konfiguration und Installationsordner):
 
 ```bash
-./uninstall.sh
+~/.local/share/AudioSwitch/uninstall.sh
 ```
 
 ## Manuelle Installation
