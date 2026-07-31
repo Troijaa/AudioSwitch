@@ -11,6 +11,8 @@ gi.require_version("XApp", "1.0")
 from gi.repository import Gtk, GdkPixbuf, Gdk, XApp
 from PIL import Image, ImageDraw
 
+__version__ = "1.0.0"
+
 BASE_DIR    = os.path.dirname(os.path.abspath(__file__))
 CONFIG_PATH = os.path.expanduser("~/.config/audioswitch/config.json")
 LOCK_PATH   = os.path.expanduser("~/.config/audioswitch/audioswitch.lock")
@@ -389,6 +391,12 @@ class AudioTray:
 
     def _build_menu(self):
         self._menu = Gtk.Menu()
+
+        header = Gtk.MenuItem(label=f"AudioSwitch v{__version__}")
+        header.set_sensitive(False)
+        self._menu.append(header)
+        self._menu.append(Gtk.SeparatorMenuItem())
+
         sink_map   = {n: l for n, l in self.all_sinks}
         first      = None
         for name in self._selected():
@@ -446,6 +454,10 @@ class AudioTray:
 
 
 if __name__ == "__main__":
+    if "--version" in sys.argv or "-V" in sys.argv:
+        print(f"AudioSwitch {__version__}")
+        sys.exit(0)
+
     # Zweite Instanz verhindern. _lock muss referenziert bleiben, damit der
     # Lock für die gesamte Laufzeit gehalten wird (sonst Garbage Collection).
     _lock = acquire_single_instance_lock()
