@@ -1,8 +1,12 @@
 #!/usr/bin/env xdg-open
+# VORLAGE – nicht direkt verwenden.
+# Der Pfad in "Exec" muss auf deine lokale audio_switch.py zeigen.
+# Am einfachsten richtet install.sh Autostart und Menü-Eintrag automatisch
+# mit dem korrekten Pfad ein.
 [Desktop Entry]
-Name=Audio-Ausgang
-Comment=Umschalten zwischen Matisse HD und Razer BlackShark
-Exec=python3 /mnt/M2 Linux I/Claude/Projekte/AudioSwitch/audio_switch.py
+Name=AudioSwitch
+Comment=Audio-Ausgang umschalten (Tray)
+Exec=python3 /PFAD/ZU/AudioSwitch/audio_switch.py
 Icon=audio-card
 Terminal=false
 Type=Application

@@ -10,23 +10,53 @@ Kleines Tray-Tool für Linux Mint / Cinnamon zum schnellen Wechseln zwischen zwe
 - **Einstellungen** → beliebige Ausgänge auswählen und Icon zuweisen
 - Autostart-fähig
 
-## Voraussetzungen
+## Installation (empfohlen)
+
+Das Installationsskript richtet alles automatisch ein (Abhängigkeiten, Autostart
+und Menü-Eintrag mit dem korrekten Pfad):
+
+```bash
+git clone https://github.com/Troijaa/AudioSwitch.git
+cd AudioSwitch
+./install.sh
+```
+
+Entfernen (Autostart- und Menü-Eintrag):
+
+```bash
+./uninstall.sh
+```
+
+## Manuelle Installation
+
+Voraussetzungen:
 
 ```bash
 sudo apt install python3-gi python3-pil pulseaudio-utils
 pip3 install --user --break-system-packages pystray
 ```
 
-## Starten
+Starten:
 
 ```bash
 python3 audio_switch.py
 ```
 
-## Autostart
+Autostart einrichten (robust über `autostart.sh`, das auf den Cinnamon-Tray wartet):
 
 ```bash
-cp audio_switch.desktop ~/.config/autostart/
+mkdir -p ~/.config/autostart
+cat > ~/.config/autostart/audioswitch.desktop <<EOF
+[Desktop Entry]
+Type=Application
+Name=AudioSwitch
+Comment=Audio-Ausgang umschalten (Tray)
+Exec=$(pwd)/autostart.sh
+Icon=audio-card
+Terminal=false
+Categories=AudioVideo;Audio;
+X-GNOME-Autostart-enabled=true
+EOF
 ```
 
 ## Kompatibilität
