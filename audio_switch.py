@@ -11,7 +11,7 @@ gi.require_version("XApp", "1.0")
 from gi.repository import Gtk, GdkPixbuf, Gdk, XApp
 from PIL import Image, ImageDraw
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 BASE_DIR    = os.path.dirname(os.path.abspath(__file__))
 CONFIG_PATH = os.path.expanduser("~/.config/audioswitch/config.json")
