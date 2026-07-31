@@ -16,10 +16,7 @@ echo "==> Quelle       : $SRC_DIR"
 echo "==> Installiere nach: $INSTALL_DIR"
 
 echo "==> Systemabhängigkeiten installieren (benötigt sudo)"
-sudo apt install -y python3-gi python3-pil pulseaudio-utils
-
-echo "==> Python-Abhängigkeit (pystray) installieren"
-pip3 install --user --break-system-packages pystray
+sudo apt install -y python3-gi python3-pil pulseaudio-utils gir1.2-xapp-1.0
 
 echo "==> Programmdateien kopieren"
 mkdir -p "$INSTALL_DIR"

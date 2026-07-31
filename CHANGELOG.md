@@ -23,6 +23,12 @@ und das Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 - `audio_switch.desktop` zu einer neutralen Vorlage gemacht (vorher hartkodierter,
   fremder Pfad).
 
+### Behoben
+- `install.sh` brach ab, wenn `pip3` nicht vorhanden war. Die unnötige
+  `pystray`-Abhängigkeit (wird vom Programm nicht verwendet) wurde entfernt; das
+  Tray-Icon läuft über `XApp.StatusIcon`. Zusätzlich wird `gir1.2-xapp-1.0` als
+  Abhängigkeit installiert.
+
 ## [1.0.0] - 2026-05-30
 
 ### Hinzugefügt

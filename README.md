@@ -36,8 +36,7 @@ Vollständig deinstallieren (entfernt Starter, Konfiguration und Installationsor
 Voraussetzungen:
 
 ```bash
-sudo apt install python3-gi python3-pil pulseaudio-utils
-pip3 install --user --break-system-packages pystray
+sudo apt install python3-gi python3-pil pulseaudio-utils gir1.2-xapp-1.0
 ```
 
 Starten:
