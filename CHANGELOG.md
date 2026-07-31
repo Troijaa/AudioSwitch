@@ -5,6 +5,13 @@ Alle nennenswerten Änderungen an AudioSwitch werden in dieser Datei dokumentier
 Das Format orientiert sich an [Keep a Changelog](https://keepachangelog.com/de/1.1.0/),
 und das Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.1.1] - 2026-07-31
+
+### Behoben
+- `install.sh` brach auf Systemen ohne `pip3` ab. Die unnötige `pystray`-Abhängigkeit
+  (wird vom Programm nicht verwendet) wurde entfernt; das Tray-Icon läuft über
+  `XApp.StatusIcon`. Zusätzlich wird `gir1.2-xapp-1.0` als Abhängigkeit installiert.
+
 ## [1.1.0] - 2026-07-31
 
 ### Hinzugefügt
@@ -23,12 +30,6 @@ und das Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 - `audio_switch.desktop` zu einer neutralen Vorlage gemacht (vorher hartkodierter,
   fremder Pfad).
 
-### Behoben
-- `install.sh` brach ab, wenn `pip3` nicht vorhanden war. Die unnötige
-  `pystray`-Abhängigkeit (wird vom Programm nicht verwendet) wurde entfernt; das
-  Tray-Icon läuft über `XApp.StatusIcon`. Zusätzlich wird `gir1.2-xapp-1.0` als
-  Abhängigkeit installiert.
-
 ## [1.0.0] - 2026-05-30
 
 ### Hinzugefügt
@@ -38,5 +39,6 @@ und das Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 - Einstellungen zum Auswählen der Ausgänge und Zuweisen von Icons.
 - Autostart-Unterstützung.
 
+[1.1.1]: https://github.com/Troijaa/AudioSwitch/releases/tag/v1.1.1
 [1.1.0]: https://github.com/Troijaa/AudioSwitch/releases/tag/v1.1.0
 [1.0.0]: https://github.com/Troijaa/AudioSwitch/releases/tag/v1.0.0
